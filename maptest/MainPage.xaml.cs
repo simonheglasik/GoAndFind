@@ -18,36 +18,34 @@ namespace maptest
         public MainPage()
         {
             InitializeComponent();
-            map.MapType = MapType.Hybrid;
-            map.MoveToRegion(new MapSpan(new Position()))
+            map.MapType = MapType.Street;
+            map.IsShowingUser = true;
 
-            Task.Run(() =>
-            {
-                var locator = CrossGeolocator.Current;
-                locator.DesiredAccuracy = 50;
-
-                var task = locator.GetPositionAsync(new TimeSpan(0, 0, 5));
-                task.Wait();
-
-                var location = task.Result;
-
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    map.Pins.Add(new Pin { 
-                        Label = "Test",
-                        Position = new Position(location.Latitude, location.Longitude) 
-                    });
-                });
-            });
+            GetPosition();
         }
-        private async void Button_Clicked(object sender, EventArgs e)
+
+        private async void GetPosition()
         {
             var locator = CrossGeolocator.Current;
-            locator.DesiredAccuracy = 50;
+            locator.DesiredAccuracy = 5;
 
-            var location = await locator.GetPositionAsync();
-            Position position = new Position(location.Latitude, location.Longitude);
-            
+            var task = await locator.GetPositionAsync(new TimeSpan(0,0,1));
+
+
+            var location = task;
+
+            MapSpan mapSpan = MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(0.444));
+
+            map.MoveToRegion(mapSpan);
+
+            /*Device.BeginInvokeOnMainThread(() =>
+            {
+                map.Pins.Add(new Pin
+                {
+                    Label = "Test",
+                    Position = new Position(location.Latitude, location.Longitude)
+                });
+            });*/
         }
     }
 }
