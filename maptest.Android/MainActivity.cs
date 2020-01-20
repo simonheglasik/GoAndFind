@@ -7,6 +7,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android;
+using Android.Gms.Maps.Model;
+using Xamarin.Forms.Maps;
 
 namespace maptest.Droid
 {
@@ -52,6 +54,16 @@ namespace maptest.Droid
                     // Permissions already granted - display a message.
                 }
             }
+        }
+        
+        protected MarkerOptions CreateMarker(Pin pin)
+        {
+            var marker = new MarkerOptions();
+            marker.SetPosition(new LatLng(pin.Position.Latitude, pin.Position.Longitude));
+            marker.SetTitle(pin.Label);
+            marker.SetSnippet(pin.Address);
+            marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.pin));
+            return marker;
         }
     }
 }

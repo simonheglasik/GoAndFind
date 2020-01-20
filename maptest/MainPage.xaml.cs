@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Plugin.Geolocator;
 
+
 namespace maptest
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
@@ -22,6 +23,8 @@ namespace maptest
             map.IsShowingUser = true;
 
             GetPosition();
+            
+           
         }
 
         private async void GetPosition()
@@ -31,8 +34,9 @@ namespace maptest
 
             var task = await locator.GetPositionAsync(new TimeSpan(0,0,1));
 
-
             var location = task;
+
+            
 
             MapSpan mapSpan = MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(0.444));
 
