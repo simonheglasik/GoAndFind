@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Plugin.Geolocator;
+using maptest.NewFolder;
 
 
 namespace maptest
@@ -36,20 +37,20 @@ namespace maptest
 
             var location = task;
 
-            
-
             MapSpan mapSpan = MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(0.444));
 
             map.MoveToRegion(mapSpan);
+            var item = new Item();
 
-            /*Device.BeginInvokeOnMainThread(() =>
+            Device.BeginInvokeOnMainThread(() =>
             {
                 map.Pins.Add(new Pin
                 {
+
                     Label = "Test",
-                    Position = new Position(location.Latitude, location.Longitude)
-                });
-            });*/
+                    Position = new Position(item.ItemSpawn(location).Longitude, item.ItemSpawn(location).Latitude)
+                }); ;
+            });
         }
     }
 }
