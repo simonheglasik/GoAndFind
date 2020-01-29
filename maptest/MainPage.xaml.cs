@@ -47,7 +47,7 @@ namespace maptest
                 map.Pins.Add(new Pin
                 {
 
-                    Label = "Test",
+                    Label = "Item",
                     Position = new Position(item.ItemSpawn(location).Longitude, item.ItemSpawn(location).Latitude)
                 }); ;
             });

@@ -12,10 +12,10 @@ namespace maptest.NewFolder
         {
             var rnd = new Random();
             double rlon = rnd.Next(-100, 100);
-            double lon = rlon / 30000;
+            double lon = rlon / 40000;
             double rlan = rnd.Next(-100, 100);
-            double lan = rlan / 30000;
-            return new Position(playerposition.Longitude + lan, playerposition.Latitude);
+            double lan = rlan / 40000;
+            return new Position(playerposition.Longitude + lon, playerposition.Latitude + lan);
         }
     }
 }
