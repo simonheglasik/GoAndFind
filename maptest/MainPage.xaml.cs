@@ -25,22 +25,27 @@ namespace maptest
 
             GetPosition();
             
-           
+
         }
 
         private async void GetPosition()
         {
+
             var locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = 5;
 
-            var task = await locator.GetPositionAsync(new TimeSpan(0,0,1));
+            var task = await locator.GetPositionAsync(new TimeSpan(0, 0, 1));
 
             var location = task;
 
             MapSpan mapSpan = MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(0.444));
-
             map.MoveToRegion(mapSpan);
             var item = new Item();
+
+
+            var itemloc = new Position(item.ItemSpawn(location).Longitude, item.ItemSpawn(location).Latitude);
+
+            Butonik(location.Latitude, location.Longitude,itemloc.Latitude,itemloc.Longitude);
 
             Device.BeginInvokeOnMainThread(() =>
             {
@@ -48,9 +53,17 @@ namespace maptest
                 {
 
                     Label = "Item",
-                    Position = new Position(item.ItemSpawn(location).Longitude, item.ItemSpawn(location).Latitude)
+                    Position = itemloc
                 }); ;
             });
+        }
+        public void Butonik(double playerLatitude,double playerLongitude, double itemLatitude, double itemLongitude)
+        {
+            double a = 10;
+            if(playerLatitude - itemLatitude < a && playerLongitude - itemLongitude < a)
+            {
+                button.BackgroundColor = Color.Red;
+            }
         }
     }
 }

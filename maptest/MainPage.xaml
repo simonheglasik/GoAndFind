@@ -6,21 +6,31 @@
              mc:Ignorable="d"
              x:Class="maptest.MainPage"
             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
-    <maps:Map x:Name="map">
-        <x:Arguments>
+    <Grid>
+
+        <maps:Map x:Name="map">
+
+            <x:Arguments>
             <maps:MapSpan>
                 <x:Arguments>
                     <maps:Position>
                         <x:Arguments>
                             <x:Double>location.latitude</x:Double>
-                            <x:Double>location.longtitude</x:Double>
-                        </x:Arguments>
+                                <x:Double>location.longtitude</x:Double>
+                            </x:Arguments>
                     </maps:Position>
                     <x:Double>0.01</x:Double>
                     <x:Double>0.01</x:Double>
                 </x:Arguments>
             </maps:MapSpan>
         </x:Arguments>
-    </maps:Map>
-
+        </maps:Map>
+        <Button x:Name="button"
+            BackgroundColor="Yellow" Text="2313â▬,âö╝73M▬♂"
+            HorizontalOptions="Center"
+            VerticalOptions="End">
+            
+        </Button>
+    </Grid>
 </ContentPage>
+    
