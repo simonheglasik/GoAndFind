@@ -8,7 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Plugin.Geolocator;
 using maptest.NewFolder;
-
+using maptest.ViewModel;
 
 namespace maptest
 {
@@ -24,12 +24,13 @@ namespace maptest
             map.IsShowingUser = true;
 
             GetPosition();
-            
 
+            
         }
 
         private async void GetPosition()
         {
+            var navigation = new Navigation();
 
             var locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = 5;
@@ -40,12 +41,13 @@ namespace maptest
 
             MapSpan mapSpan = MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(0.444));
             map.MoveToRegion(mapSpan);
+
+
             var item = new Item();
 
 
             var itemloc = new Position(item.ItemSpawn(location).Longitude, item.ItemSpawn(location).Latitude);
 
-            Butonik(location.Latitude, location.Longitude,itemloc.Latitude,itemloc.Longitude);
 
             Device.BeginInvokeOnMainThread(() =>
             {
@@ -56,14 +58,16 @@ namespace maptest
                     Position = itemloc
                 }); ;
             });
-        }
-        public void Butonik(double playerLatitude,double playerLongitude, double itemLatitude, double itemLongitude)
-        {
-            double a = 10;
-            if(playerLatitude - itemLatitude < a && playerLongitude - itemLongitude < a)
+            /*
+            Device.StartTimer(new TimeSpan(0, 0, 1), () =>
             {
-                button.BackgroundColor = Color.Red;
-            }
+                // do something every 60 seconds
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    navigation.Find(itemloc);
+                });
+                return true; // runs again, or false to stop
+            });*/
         }
     }
 }

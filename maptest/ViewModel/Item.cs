@@ -17,5 +17,6 @@ namespace maptest.NewFolder
             double lan = rlan / 40000;
             return new Position(playerposition.Longitude + lon, playerposition.Latitude + lan);
         }
+        
     }
 }
