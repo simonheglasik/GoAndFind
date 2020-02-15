@@ -32,7 +32,7 @@
         </x:Arguments>
         </maps:Map>
         <Button x:Name="button"
-            BackgroundColor="{Binding Color}" Text=""
+            BackgroundColor="gold" Text=""
             HorizontalOptions="Center"
             VerticalOptions="End">
             

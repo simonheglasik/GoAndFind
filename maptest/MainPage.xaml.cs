@@ -58,16 +58,50 @@ namespace maptest
                     Position = itemloc
                 }); ;
             });
-            /*
-            Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+
+            Device.StartTimer(new TimeSpan(0), () =>
             {
                 // do something every 60 seconds
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    navigation.Find(itemloc);
+                    Find(itemloc);
                 });
                 return true; // runs again, or false to stop
-            });*/
+            });
+        }
+        public void Find(Position item)
+        {
+            double time = DateTime.Now.Ticks;
+            var player = new Player();
+            Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+            {
+                bool next = true;
+                // do something every 60 seconds
+                Device.BeginInvokeOnMainThread(() =>
+                {
+
+                    
+                    //double blinktime = time + (((item.Latitude + item.Longitude) - (player.PlayerPositon().Result.Longitude + player.PlayerPositon().Result.Latitude)) / 100000);
+                    double blinktime = time + 4500;
+                    if (blinktime < 0)
+                    {
+                        blinktime = -blinktime;
+                    }
+                    {
+                        if (time <= blinktime)
+                        {
+                            button.BackgroundColor = Color.Red;
+                        }
+                        else
+                        {
+                            next = false;
+                        }
+                    }
+                });
+                return next; // runs again, or false to stop
+            });
+                button.BackgroundColor = Color.Gold;
+        
         }
     }
 }

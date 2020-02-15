@@ -12,7 +12,7 @@ namespace maptest.ViewModel
         public async Task<Position> PlayerPositon()
         {
             var locator = CrossGeolocator.Current;
-            locator.DesiredAccuracy = 5;
+            locator.DesiredAccuracy = 30;
 
             var task = await locator.GetPositionAsync(new TimeSpan(0, 0, 1));
 
